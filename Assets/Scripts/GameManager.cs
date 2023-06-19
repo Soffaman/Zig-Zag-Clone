@@ -8,9 +8,15 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public bool gameStarted = false;
-    public int score = 0;
+    public int score;
 
     public TextMeshProUGUI textMesh;
+    public TextMeshProUGUI highScore;
+
+    private void Awake()
+    {
+        highScore.text = "Best: " + GetHighScore().ToString();
+    }
 
     public void StartGame()
     {
@@ -37,5 +43,17 @@ public class GameManager : MonoBehaviour
     {
         score++;
         textMesh.text = score.ToString();
+
+        if (score > GetHighScore())
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+            highScore.text = "Best: " + score.ToString();
+        }
+    }
+
+    public int GetHighScore()
+    {
+        int i = PlayerPrefs.GetInt("HighScore");
+        return i;
     }
 }
