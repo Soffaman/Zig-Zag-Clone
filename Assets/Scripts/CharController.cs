@@ -39,6 +39,13 @@ public class CharController : MonoBehaviour
             Switch();
         }
 
+        UnderChecking();
+
+        gameManager.EndGame(transform);
+    }
+
+    private void UnderChecking()
+    {
         RaycastHit hit;
 
         if (!Physics.Raycast(rayStart.position, -transform.up, out hit, Mathf.Infinity))
