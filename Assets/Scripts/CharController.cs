@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class CharController : MonoBehaviour
 {
+    public Transform rayStart;
+
+    private Animator anim;
     private Rigidbody rb;
     private bool walkingRight = true;
+
+    
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -23,6 +29,13 @@ public class CharController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Switch();
+        }
+
+        RaycastHit hit;
+
+        if (!Physics.Raycast(rayStart.position, -transform.up, out hit, Mathf.Infinity))
+        {
+            anim.SetTrigger("isFalling");
         }
     }
 
