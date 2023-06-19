@@ -56,6 +56,10 @@ public class CharController : MonoBehaviour
 
     private void Switch()
     {
+        if (!gameManager.gameStarted)
+        {
+            return;
+        }
         walkingRight = !walkingRight;
 
         if (walkingRight)
@@ -65,6 +69,15 @@ public class CharController : MonoBehaviour
         else
         {
             transform.rotation = Quaternion.Euler(0, -45, 0);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Crystal")
+        {
+            Destroy(other.gameObject);
+            gameManager.ScoreIncrease();
         }
     }
 }
