@@ -6,6 +6,7 @@ public class CharController : MonoBehaviour
 {
     
     public Transform rayStart;
+    public GameObject crystalEffect;
 
     private Animator anim;
     private Rigidbody rb;
@@ -76,8 +77,10 @@ public class CharController : MonoBehaviour
     {
         if (other.tag == "Crystal")
         {
-            Destroy(other.gameObject);
             gameManager.ScoreIncrease();
+            GameObject g = Instantiate(crystalEffect, rayStart.transform.position, Quaternion.identity);
+            Destroy(g, 2f);
+            Destroy(other.gameObject);
         }
     }
 }
