@@ -53,6 +53,10 @@ public class CharController : MonoBehaviour
         {
             anim.SetTrigger("isFalling");
         }
+        else
+        {
+            anim.SetTrigger("notFallingAnymore");
+        }
     }
 
     private void Switch()
